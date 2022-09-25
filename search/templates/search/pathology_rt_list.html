@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% load crispy_forms_tags %}
+
+<body>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-body">
+                
+                            <form method="get", class="bootstrap4">
+                            {{ filter.form|crispy}}
+                            <input type="submit" />
+                            </form>
+                        </div>
+                    </div>
+
+                 </div>
+            </div>
+            <div class="col-9">
+                <h2 class="text-center"><u>Tumor Registry Pathology List</u></h2><br>            
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                        <th>patient__accession</th>
+                        <th>patient sex</th>
+                        <th>age_at_diagnosis</th>
+                        <th>location_of_tumor</th>
+                        <th>node_category</th>
+                        <th>lymph_vascular_invasion</th>
+                        <th>tumor_grade</th>
+                        <th>surgical_margin</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pathology_tr in page_obj.object_list %}
+                        {# note that the list of posts are in the page_obj.object_list not page_obj #}
+                        <tr>
+                            <td>{{pathology_tr.patient}}</td>
+                            <td>{{pathology_tr.patient.sex}}</td>
+                            <td>{{pathology_tr.age_at_diagnosis}}</td>
+                            <td>{{pathology_tr.location_of_tumor}}</td>
+                            <td>{{pathology_tr.node_category}}</td>
+                            <td>{{pathology_tr.lymph_vascular_invasion}}</td>
+                            <td>{{pathology_tr.tumor_grade}}</td>
+                            <td>{{pathology_tr.surgical_margin}}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

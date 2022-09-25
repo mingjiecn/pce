@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% load crispy_forms_tags %}
+  <body>
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Customer: </h5>
+                <hr>
+                <a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
+                <a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a>
+    
+            </div>
+        </div>
+    
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Contact Information</h5>
+                <hr>
+                <p>Email:  </p>
+                <p>Phone:  </p>
+            </div>
+        </div>
+    
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Total Orders</h5>
+                <hr>
+                <h1 style="text-align: center;padding: 10px">888</h1>
+            </div>
+        </div>
+    </div>
+    
+    
+    <br>
+  <div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
+  <div id="pivot-chart-container"></div>
+
+  <script>
+    function processData(dataset) {
+    var result = []
+    dataset = JSON.parse(dataset);
+    dataset.forEach(item => result.push(item.fields));
+    return result;
+}
+$.ajax({
+    url: $("#pivot-table-container").attr("data-url"),
+    dataType: 'json',
+    success: function(data) {
+        console.log(data)
+        var data = [
+        {
+            x: ['giraffes', 'orangutans', 'monkeys'],
+            y: [20, 14, 23],
+            type: 'bar'
+        }
+        ];
+
+        Plotly.newPlot('pivot-chart-container', data);
+
+    }
+});
+  </script>
+</body>
+{% endblock %}

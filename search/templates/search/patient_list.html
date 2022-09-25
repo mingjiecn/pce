@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% load crispy_forms_tags %}
+
+<body>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-body">
+                
+                            <form method="get", class="bootstrap4">
+                            {{ filter.form|crispy}}
+                            <input type="submit" />
+                            </form>
+                        </div>
+                    </div>
+
+                 </div>
+            </div>
+            <div class="col-9">
+                <h2 class="text-center"><u>Patient List</u></h2><br>            
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                        <th>Accession</th>
+                        <th>Sex</th>
+                        <th>Date of Diagnosis</th>
+                        <th>Age at Diagnosis</th>
+                        <th>Last Follow Up</th>
+                        <th>Date of Death</th>
+                        <th>Category</th>
+                        <th>Radiation</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in page_obj.object_list %}
+                        {# note that the list of posts are in the page_obj.object_list not page_obj #}
+                        <tr>
+                            <td>{{patient.accession}}</td>
+                            <td>{{patient.sex}}</td>
+                            <td>{{patient.date_of_diagnosis}}</td>
+                            <td>{{patient.age_at_diagnosis}}</td>
+                            <td>{{patient.last_follow_up}}</td>
+                            <td>{{patient.date_of_death}}</td>
+                            <td>{{patient.category}}</td>
+                            <td>{{patient.radiation}}</td>
+                            
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
