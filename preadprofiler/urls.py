@@ -22,7 +22,7 @@ admin.site.index_title = 'PCE Admin'
 admin.site.site_title = 'PCE Admin Page'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', include('about.urls')),
     path('', include('search.urls')),
     url(r'^report_builder/', include('report_builder.urls')),

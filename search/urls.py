@@ -3,10 +3,10 @@ from search import views
 
 
 urlpatterns = [
-    path('', views.search, name='search'),
+    path('search', views.search, name='search'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('data', views.pivot_data, name='pivot_data'),
-    path('patients', views.patient_list),
-    path('pathology_tr', views.patholoy_tr_list),
+    path('', views.patient_list, name='patients'),
+    path('pathology_tr', views.patholoy_tr_list, name='pathology_tr'),
     
 ]
