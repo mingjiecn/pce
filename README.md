@@ -1,8 +1,8 @@
-# PreadProfiler
+# PCE
 
 ## Application Installation
 
-PreadProfiler is a django project.
+PCE is a django project.
 
 1. Set Up Your Development Environment inside your folder.
 
@@ -18,14 +18,32 @@ PreadProfiler is a django project.
     venv\Scripts\activate.bat
     ```
 
-2. Install the Django and Plotly.
+2. Install the denpendencies.
 
     ```bash
-    pip install Django
-    pip install plotly==4.14.3
+    python manage.py makemigrations
+    python manage.py migrate 
     ```
 
-3. Start the server.
+3. Apply the migrations:
+
+    ```bash
+    python manage.py runserver
+    ```
+
+4. Create a superuser
+
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+5. Load sample data:
+
+    ```bash
+    python manage.py loaddata sample.json
+    ```
+
+6. Start the server.
 
     ```bash
     python manage.py runserver
