@@ -20,15 +20,15 @@ PCE is a django project.
 
 2. Install the denpendencies.
 
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate 
+    ```bash 
+    pip3 install -r requirements.txt
     ```
 
 3. Apply the migrations:
 
     ```bash
-    python manage.py runserver
+    python manage.py makemigrations
+    python manage.py migrate 
     ```
 
 4. Create a superuser
